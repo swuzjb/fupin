@@ -14,7 +14,7 @@ public class AssessmentPoint {
     @GeneratedValue
     private Integer assessmentPointId;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.REMOVE}, optional = false)
+    @ManyToOne()
     @JoinColumn(name = "assessmentObject_id")
     //考核对象
     private AssessmentObject assessmentObject;

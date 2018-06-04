@@ -14,4 +14,7 @@ public interface AssessmentPointRepository extends JpaRepository<AssessmentPoint
     //通过考核对象获取得分(得分高到低排序)
     AssessmentPoint findByAssessmentObjectOrderByPoint(AssessmentObject assessmentObject);
 
+    //通过考核对象Id删除
+    Long deleteAllByAssessmentObject_AssessmentObjectId(Integer assessmentObjectId);
+
 }

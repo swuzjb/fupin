@@ -29,8 +29,9 @@ public class PointController {
     public Point  point(@RequestParam("objectId") Integer objectId,@RequestParam("assessmentIndexId") Integer assessmentIndexId,@RequestParam("point") Double duPoint){
         Point point=new Point();
         AssessmentObject assessmentObject=new AssessmentObject();
-        AssessmentIndex assessmentIndex=new AssessmentIndex();
-        assessmentIndex.setAssessmentIndexId(assessmentIndexId);
+        AssessmentIndex assessmentIndex = assessmentIndexService.getAssessmentIndexbyId(assessmentIndexId);
+        if (assessmentIndex == null)
+            return null;
         assessmentObject.setAssessmentObjectId(objectId);
         point.setAssessmentIndex(assessmentIndex);
         point.setAssessmentObject(assessmentObject);

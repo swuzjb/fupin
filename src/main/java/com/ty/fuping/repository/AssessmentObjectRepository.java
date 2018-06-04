@@ -19,9 +19,7 @@ public interface AssessmentObjectRepository extends JpaRepository<AssessmentObje
     List<AssessmentObject> findAllByTown(Town town);
 
     //通过id删除
-    @Query(value = "delete from assessment_object where assessment_object_id=?1 ", nativeQuery = true)
-    @Modifying
-    Integer deleteAssessmentObjectByAssessmentObjectId(Integer assessmentObjectId);
+    Long deleteAllByAssessmentObjectId(Integer assessmentObjectId);
 
     //通过用户名查找
     AssessmentObject findByAccount(String userName);

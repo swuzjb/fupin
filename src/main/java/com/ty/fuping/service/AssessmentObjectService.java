@@ -3,9 +3,7 @@ package com.ty.fuping.service;
 import com.ty.fuping.entity.AssessmentObject;
 import com.ty.fuping.entity.AssessmentandObject;
 import com.ty.fuping.entity.Town;
-import com.ty.fuping.repository.AssessmentObjectRepository;
-import com.ty.fuping.repository.AssessmentandObjectRepository;
-import com.ty.fuping.repository.AssistanceEffectRepository;
+import com.ty.fuping.repository.*;
 import com.ty.fuping.repository.AssistanceMeasureRepository.*;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +42,10 @@ public class AssessmentObjectService {
     private SocialAssistanceRepository socialAssistanceRepository;
     @Autowired
     private SpecialPovertyAlleviationRepository specialPovertyAlleviationRepository;
+    @Autowired
+    private PointRepository pointRepository;
+    @Autowired
+    private AssessmentPointRepository assessmentPointRepository;
 
     @Transactional
     //添加被调查者
@@ -121,9 +123,12 @@ public class AssessmentObjectService {
         prosperousIndustryRepository.deleteAllByAssessmentObject_AssessmentObjectId(assessmentObjectId);//删除富民产业记录
         socialAssistanceRepository.deleteAllByAssessmentObject_AssessmentObjectId(assessmentObjectId);//删除社会援助记录
         specialPovertyAlleviationRepository.deleteAllByAssessmentObject_AssessmentObjectId(assessmentObjectId);//删除专项扶贫记录
+        //删除所有评分(包括指标得分和计划得分)
+        pointRepository.deleteAllByAssessmentObject_AssessmentObjectId(assessmentObjectId);
+        assessmentPointRepository.deleteAllByAssessmentObject_AssessmentObjectId(assessmentObjectId);
 
         assessmentandObjectRepository.deleteAllByAssessmentObject_AssessmentObjectId(assessmentObjectId);
-        assessmentObjectRepository.deleteAssessmentObjectByAssessmentObjectId(assessmentObjectId);
+        assessmentObjectRepository.deleteAllByAssessmentObjectId(assessmentObjectId);
     }
 
     //通过用户名获取考核对象

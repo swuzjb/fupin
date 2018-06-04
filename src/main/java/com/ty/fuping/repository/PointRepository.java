@@ -17,6 +17,9 @@ public interface PointRepository extends JpaRepository<Point, Integer> {
     //通过考核对象删除
     Long deleteAllByAssessmentObject(AssessmentObject assessmentObject);
 
+    //通过考核对象Id删除
+    Long deleteAllByAssessmentObject_AssessmentObjectId(Integer assessmentObjectId);
+
     //通过考核计划删除
     Long deleteAllByAssessmentIndex(AssessmentIndex assessmentIndex);
 

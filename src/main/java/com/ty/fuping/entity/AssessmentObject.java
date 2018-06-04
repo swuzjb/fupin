@@ -56,6 +56,11 @@ public class AssessmentObject {
     @OneToMany(cascade = {CascadeType.REFRESH}, mappedBy = "assessmentObject")
     List<SpecialPovertyAlleviation> specialPovertyAlleviations;
 
+    //所属打分
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "assessmentObject")
+    List<Point> pointList;
+
     //性别
     private String sex;
 
@@ -105,6 +110,70 @@ public class AssessmentObject {
 
     public void setTown(Town town) {
         this.town = town;
+    }
+
+    public List<DrinkingSafety> getDrinkingSafeties() {
+        return drinkingSafeties;
+    }
+
+    public void setDrinkingSafeties(List<DrinkingSafety> drinkingSafeties) {
+        this.drinkingSafeties = drinkingSafeties;
+    }
+
+    public List<FinancialAssistance> getFinancialAssistances() {
+        return financialAssistances;
+    }
+
+    public void setFinancialAssistances(List<FinancialAssistance> financialAssistances) {
+        this.financialAssistances = financialAssistances;
+    }
+
+    public List<HouseRenovation> getHouseRenovations() {
+        return houseRenovations;
+    }
+
+    public void setHouseRenovations(List<HouseRenovation> houseRenovations) {
+        this.houseRenovations = houseRenovations;
+    }
+
+    public List<LaborTraining> getLaborTrainings() {
+        return laborTrainings;
+    }
+
+    public void setLaborTrainings(List<LaborTraining> laborTrainings) {
+        this.laborTrainings = laborTrainings;
+    }
+
+    public List<ProsperousIndustry> getProsperousIndustries() {
+        return prosperousIndustries;
+    }
+
+    public void setProsperousIndustries(List<ProsperousIndustry> prosperousIndustries) {
+        this.prosperousIndustries = prosperousIndustries;
+    }
+
+    public List<SocialAssistance> getSocialAssistances() {
+        return socialAssistances;
+    }
+
+    public void setSocialAssistances(List<SocialAssistance> socialAssistances) {
+        this.socialAssistances = socialAssistances;
+    }
+
+    public List<SpecialPovertyAlleviation> getSpecialPovertyAlleviations() {
+        return specialPovertyAlleviations;
+    }
+
+    public void setSpecialPovertyAlleviations(List<SpecialPovertyAlleviation> specialPovertyAlleviations) {
+        this.specialPovertyAlleviations = specialPovertyAlleviations;
+    }
+
+    public List<Point> getPointList() {
+        return pointList;
+    }
+
+    public void setPointList(List<Point> pointList) {
+        this.pointList = pointList;
     }
 
     public String getSex() {

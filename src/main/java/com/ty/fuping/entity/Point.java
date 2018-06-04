@@ -16,12 +16,12 @@ public class Point {
     @GeneratedValue
     private Integer pointId;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.REMOVE}, optional = false)
+    @ManyToOne()
     @JoinColumn(name = "assessmentObject_id")
     //考核对象
     private AssessmentObject assessmentObject;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.REMOVE}, optional = false)
+    @ManyToOne()
     @JoinColumn(name = "assessmentIndex_id")
     //所属考核指标
     private AssessmentIndex assessmentIndex;
