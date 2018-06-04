@@ -1,0 +1,16 @@
+web:
+  upload-path: /home/ubuntu/www
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://gz-cdb-fyqbkkia.sql.tencentcdb.com:62591/fupin?useUnicode=true&amp&characterEncoding=utf-8
+    username: fupin
+    password: Yang654321
+fupin:
+  backup:
+    host: gz-cdb-fyqbkkia.sql.tencentcdb.com
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    database: fupin
+    port: 62591
+    file: /home/ubuntu/back/back.sql

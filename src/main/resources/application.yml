@@ -1,0 +1,13 @@
+server:
+  context-path: /fupin
+spring:
+  profiles:
+      active: qcloud
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+data:
+  assessmentStandardPoint: 10
+web:
+  upload-path: www/
