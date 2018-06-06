@@ -147,7 +147,7 @@ public class UserController {
     public boolean install() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         User user = new User();
         user.setUserName("admin");
-        user.setPassWord(MD5Util.EncoderPwdByMd5("111111"));
+        user.setPassWord("111111");
         user.setName("管理员");
         user.setUserType("超级管理员");
         user = userService.addUser(user);

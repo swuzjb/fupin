@@ -64,10 +64,10 @@ public class LoginController {
                 jsonObject.put("workUnit", user.getWorkUnit());
                 jsonObject.put("position", user.getPosition());
                 jsonObject.put("remark", user.getRemark());
-                jsonObject.put("districtId", user.getDistrict().getDistrictId());
-                jsonObject.put("districtName", user.getDistrict().getDistrictName());
-                jsonObject.put("townId", user.getTown().getTownId());
-                jsonObject.put("townName", user.getTown().getTownName());
+                jsonObject.put("districtId", user.getDistrict() != null ? user.getDistrict().getDistrictId() : null);
+                jsonObject.put("districtName", user.getDistrict() != null ? user.getDistrict().getDistrictName() : null);
+                jsonObject.put("townId", user.getTown() != null ? user.getTown().getTownId() : null);
+                jsonObject.put("townName", user.getTown() != null ? user.getTown().getTownName() : null);
 
                 session.setAttribute("userName", userName);
             } else { //如果密码不正确
