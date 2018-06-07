@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -41,8 +42,9 @@ public class BackUpController {
         try {
             FileInputStream inputStream = new FileInputStream(backUpProperties.getFile());
             byte[] data = new byte[2048];
-            while (inputStream.read(data) != -1) {
-                response.getOutputStream().write(data);
+            int len = 0;
+            while ((len = inputStream.read(data)) != -1) {
+                response.getOutputStream().write(data, 0, len);
             }
             response.getOutputStream().flush();
             response.getOutputStream().close();
@@ -55,8 +57,9 @@ public class BackUpController {
     @ResponseBody
     public Object recover(@RequestParam("file") MultipartFile backFile) {
         try {
+            backFile.transferTo(new File(backUpProperties.getFile()));
             DataBaseUtil.importDatabase(backUpProperties.getHost(), backUpProperties.getPort(),
-                    backUpProperties.getUsername(), backUpProperties.getPassword(), backUpProperties.getDatabase(), backFile.getInputStream());
+                    backUpProperties.getUsername(), backUpProperties.getPassword(), backUpProperties.getDatabase(), backUpProperties.getFile());
         } catch (IOException e) {
             e.printStackTrace();
             return Boolean.FALSE;

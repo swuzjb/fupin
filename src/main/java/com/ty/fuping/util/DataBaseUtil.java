@@ -1,6 +1,10 @@
 package com.ty.fuping.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * 数据库备份与恢复
@@ -10,6 +14,7 @@ import java.io.*;
  * Created on 2018/5/29
  */
 public class DataBaseUtil {
+    private static final Logger log = LoggerFactory.getLogger(DataBaseUtil.class);
 
     /**
      * 备份命令
@@ -40,22 +45,25 @@ public class DataBaseUtil {
         return false;
     }
 
-    public static void importDatabase(String host, Integer port, String user, String password, String database, InputStream sqlInputStream) {
+    public static void importDatabase(String host, Integer port, String user, String password, String database, String filePath) {
         try {
             String command = String.format(IMPORT_COMMAND, host, port, user, password, database);
+            log.info("command:{}", command);
             Runtime runtime = Runtime.getRuntime();
             Process process = runtime.exec(command);
             OutputStream outputStream = process.getOutputStream();
-            StringBuffer sql = new StringBuffer();
-            String s = "";
-            BufferedReader fileReader = new BufferedReader(new InputStreamReader(sqlInputStream));
-            while ((s = fileReader.readLine()) != null) {
-                sql.append(s);
+            outputStream.write(String.format("source %s", filePath).getBytes());
+            outputStream.flush();
+            outputStream.close();
+            Scanner scanner = new Scanner(process.getInputStream());
+            while (scanner.hasNextLine()) {
+                log.info("响应:{}", scanner.nextLine());
             }
-            OutputStreamWriter writer = new OutputStreamWriter(outputStream, "utf-8");
-            writer.write(sql.toString());
-            writer.flush();
-            writer.close();
+            scanner.close();
+            scanner = new Scanner(process.getErrorStream());
+            while (scanner.hasNextLine()) {
+                log.error(scanner.nextLine());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
