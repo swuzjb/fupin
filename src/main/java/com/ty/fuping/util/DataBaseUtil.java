@@ -19,7 +19,7 @@ public class DataBaseUtil {
     /**
      * 备份命令
      */
-    private static final String EXPORT_COMMAND = "mysqldump -h%s -P%d -u%s -p%s --default-character-set=utf8 --result-file=%s --add-drop-table %s";
+    private static final String EXPORT_COMMAND = "mysqldump -h%s -P%d -u%s -p%s --default-character-set=utf8 --set-gtid-purged=OFF --result-file=%s --add-drop-table %s";
 
     /**
      * 恢复命令
